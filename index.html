@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía | Proyecto Circuit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px;
+            width: 100%;
+            max-width: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-width: 450px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            bottom: -1.25rem;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 9999px;
+            padding: 0.5rem;
+            border: 4px solid #f0f4f8;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004777]">Proyecto Circuit</h1>
+            <p class="text-lg text-gray-600 mt-2">Resumen de Actividades y Planificación Semanal | Julio 2025</p>
+        </header>
+
+        <section id="kpis" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="kpi-card">
+                <p class="text-6xl font-bold text-[#00AFB9]">11</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-2">Sitios Completados</h3>
+            </div>
+            <div class="kpi-card">
+                <p class="text-6xl font-bold text-[#FF7700]">5</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-2">A Reprogramar</h3>
+            </div>
+            <div class="kpi-card">
+                <p class="text-6xl font-bold text-[#A30000]">1</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-2">Sitio Cancelado</h3>
+            </div>
+        </section>
+
+        <section id="overview" class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-center bg-white p-6 rounded-lg shadow-md">
+            <div class="md:col-span-2">
+                 <h2 class="text-2xl font-bold text-[#004777] mb-4">Resumen del Estado General</h2>
+                 <p class="text-gray-600">Este gráfico muestra la proporción de todos los sitios registrados según su estado actual. La mayoría de las tareas se han completado exitosamente, pero hay un grupo importante de sitios que requieren atención para su reprogramación.</p>
+            </div>
+            <div class="md:col-span-3">
+                <div class="chart-container">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section id="reprogramar" class="bg-white p-6 rounded-lg shadow-md mb-12">
+            <h2 class="text-2xl font-bold text-[#004777] mb-4">⚠️ Sitios que Requieren Reprogramación</h2>
+            <p class="text-gray-600 mb-6">Los siguientes sitios han presentado inconvenientes y necesitan que se les asigne una nueva fecha para la visita. Es prioritario gestionar su reagendamiento.</p>
+            <div class="space-y-3">
+                <div class="p-4 bg-amber-50 border-l-4 border-[#FF7700] rounded-r-lg">
+                    <p class="font-semibold">DC Hub Gomez Palacio</p>
+                </div>
+                 <div class="p-4 bg-amber-50 border-l-4 border-[#FF7700] rounded-r-lg">
+                    <p class="font-semibold">Mexi-136 Sucursal Sabritas Cortazar</p>
+                </div>
+                 <div class="p-4 bg-amber-50 border-l-4 border-[#FF7700] rounded-r-lg">
+                    <p class="font-semibold">Mexi-202 Sucursal Sabritas Piedras Negras</p>
+                </div>
+                 <div class="p-4 bg-amber-50 border-l-4 border-[#FF7700] rounded-r-lg">
+                    <p class="font-semibold">Gamesa Acapulco, Guerrero</p>
+                </div>
+                <div class="p-4 bg-amber-50 border-l-4 border-[#FF7700] rounded-r-lg">
+                    <p class="font-semibold">Agencia Gamesa Ixtepec, Oaxaca</p>
+                    <p class="text-sm text-gray-500">Nota: Marcado como cancelado pero con indicación para reprogramar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-week" class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12 items-center bg-white p-6 rounded-lg shadow-md">
+            <div class="md:col-span-3">
+                <div class="chart-container h-96">
+                     <canvas id="weekPlanChart"></canvas>
+                </div>
+            </div>
+             <div class="md:col-span-2">
+                 <h2 class="text-2xl font-bold text-[#004777] mb-4">Carga de Trabajo: Próxima Semana</h2>
+                 <p class="text-gray-600">Este gráfico compara la cantidad de visitas programadas para cada día de la próxima semana. Permite visualizar rápidamente los días con mayor carga de trabajo, siendo el martes y el jueves los más ocupados con dos visitas cada uno.</p>
+            </div>
+        </section>
+        
+        <section id="schedule-details" class="mb-12">
+            <h2 class="text-3xl font-bold text-[#004777] text-center mb-8">Agenda Detallada: 21 al 25 de Julio</h2>
+             <div class="relative pl-10">
+                <div class="timeline-item relative pb-10">
+                    <div class="timeline-icon"><p class="text-lg">🗓️</p></div>
+                    <h3 class="text-xl font-bold mb-2">Lunes, 21 de Julio</h3>
+                    <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-239 Sucursal Sabritas Toluca</div>
+                </div>
+                <div class="timeline-item relative pb-10">
+                    <div class="timeline-icon"><p class="text-lg">🗓️</p></div>
+                    <h3 class="text-xl font-bold mb-2">Martes, 22 de Julio</h3>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-221 Sucursal Sabritas San Martin (Puebla)</div>
+                        <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-108 Agencia Gamesa Jalapa (Veracruz)</div>
+                    </div>
+                </div>
+                 <div class="timeline-item relative pb-10">
+                    <div class="timeline-icon"><p class="text-lg">🗓️</p></div>
+                    <h3 class="text-xl font-bold mb-2">Miércoles, 23 de Julio</h3>
+                    <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-202 Sucursal Sabritas Piedras Negras</div>
+                </div>
+                <div class="timeline-item relative pb-10">
+                    <div class="timeline-icon"><p class="text-lg">🗓️</p></div>
+                    <h3 class="text-xl font-bold mb-2">Jueves, 24 de Julio</h3>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Sucursal Sabritas Cuautitlan</div>
+                        <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-439 Sucursal Sabritas Rio Grande (Zacatecas)</div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="timeline-icon"><p class="text-lg">🗓️</p></div>
+                    <h3 class="text-xl font-bold mb-2">Viernes, 25 de Julio</h3>
+                    <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">Mexi-062 Bodega Gamesa Leon (Guanajuato)</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const statusChartCtx = document.getElementById('statusChart').getContext('2d');
+        new Chart(statusChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completados', 'A Reprogramar', 'Cancelados'],
+                datasets: [{
+                    label: 'Estado de Sitios',
+                    data: [11, 5, 1],
+                    backgroundColor: [
+                        '#00AFB9',
+                        '#FF7700',
+                        '#A30000'
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Inter'
+                            },
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        const weekPlanChartCtx = document.getElementById('weekPlanChart').getContext('2d');
+        new Chart(weekPlanChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
+                datasets: [{
+                    label: 'N° de Sitios a Visitar',
+                    data: [1, 2, 1, 2, 1],
+                    backgroundColor: [
+                        '#00AFB9',
+                        '#004777',
+                        '#00AFB9',
+                        '#004777',
+                        '#00AFB9'
+                    ],
+                    borderRadius: 4,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                       display: false
+                    },
+                     tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                         grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
